@@ -1,13 +1,35 @@
 import argparse
 import sys
+import time
 from rich.console import Console
 from rich.panel import Panel
 from rich.markdown import Markdown
-from rich.progress import Progress, SpinnerColumn, TextColumn
+from rich.table import Table
+from rich.theme import Theme
+from rich import box
 from src.agent.loop import AgentLoop
 
+CLAW_THEME = Theme({
+    "info": "cyan",
+    "warning": "yellow",
+    "error": "bold red",
+    "success": "bold green",
+    "highlight": "bold magenta",
+    "url": "underline blue",
+    "stat_val": "bold yellow"
+})
+
+def create_header():
+    return Panel(
+        "[bold cyan]GEMINI-CLAW[/bold cyan] [dim]v1.2 (Speed Optimized)[/dim]\n"
+        "[italic white]Autonomous Research & Synthesis Engine[/italic white]",
+        box=box.DOUBLE_EDGE,
+        border_style="cyan",
+        padding=(1, 2)
+    )
+
 def main():
-    console = Console()
+    console = Console(theme=CLAW_THEME)
     parser = argparse.ArgumentParser(description="Gemini-Claw Agent")
     parser.add_argument("--query", type=str, required=True, help="The query to execute.")
     parser.add_argument("--model", type=str, default="gemini-3-flash-preview", help="Model to use.")
@@ -15,45 +37,59 @@ def main():
     
     args = parser.parse_args()
     
-    console.print(Panel(f"[bold blue]Gemini-Claw Agent[/bold blue]\nRequest: [italic]{args.query}[/italic]", title="Initialization"))
+    console.print(create_header())
+    console.print(Panel(f"[bold white]Query:[/bold white] {args.query}", border_style="dim"))
     
     loop = AgentLoop(initial_model=args.model, verbose=args.verbose)
     
+    start_wall_time = time.time()
     result = None
     
+    status_label = "[bold cyan]Autonomous Research in progress...[/bold cyan]"
     if args.verbose:
-        # bypassing progress bar in verbose mode to see print outputs clearly
-        console.print("[yellow]Running in VERBOSE mode. Debug logs will be visible.[/yellow]")
+        console.print("[yellow]Benchmarking Mode: Active. Telemetry will sync...[/yellow]\n")
         result = loop.execute_with_retry(args.query)
     else:
-        with Progress(
-            SpinnerColumn(),
-            TextColumn("[progress.description]{task.description}"),
-            console=console,
-            transient=True,
-        ) as progress:
-            task = progress.add_task("[cyan]Initializing agent loop...", total=None)
-            progress.update(task, description="[bold cyan]Executing Decompose -> Search -> Fetch -> Synthesize pipeline...[/bold cyan]")
+        with console.status(status_label, spinner="bouncingBar") as status:
             result = loop.execute_with_retry(args.query)
     
-    if "error" in result and len(result) == 1:
-        console.print("[bold red]Final Error:[/bold red]")
-        console.print(result["error"])
+    total_duration = time.time() - start_wall_time
+
+    if not result or (isinstance(result, dict) and "error" in result):
+        console.print("\n[bold red]CRITICAL ERROR[/bold red]")
+        console.print(Panel(str(result.get("error", "Unknown error occurred")), border_style="red"))
         sys.exit(1)
         
-    console.print("\n")
-    console.print(Panel(Markdown(result.get("raw_response", "No response text")), title="[bold green]Final Response[/bold green]", expand=True))
+    # Final Result Section
+    console.print("\n" + "━" * console.width)
+    console.print("[bold green]✨ FINAL RESEARCH REPORT[/bold green]\n")
     
-    urls = result.get("urls", [])
-    if urls:
-        console.print("\n[bold yellow]Extracted URLs:[/bold yellow]")
-        for url in urls:
-            console.print(f"- [link={url}]{url}[/link]")
-            
-    # Show sub-queries transparently
-    sub_queries = result.get("sub_queries", [])
-    if sub_queries:
-        console.print(Panel("\n".join([f"- {q}" for q in sub_queries]), title="[dim]Executed Sub-Queries[/dim]", border_style="dim"))
+    final_text = result.get("raw_response", "No response text")
+    console.print(Markdown(final_text))
+    
+    console.print("\n" + "━" * console.width)
+    
+    # Telemetry Dashboard
+    telemetry = result.get("telemetry", {})
+    
+    table = Table(box=box.ROUNDED, border_style="dim", expand=True, title="[bold blue]Performance Telemetry[/bold blue]")
+    table.add_column("Metric", style="cyan")
+    table.add_column("Value", style="stat_val")
+    
+    table.add_row("Total Wall Time", f"{total_duration:.2f}s")
+    table.add_row("CLI Processing Time", f"{telemetry.get('cli_latency_ms', 0)/1000:.2f}s")
+    table.add_row("Autonomous Tool Calls", str(telemetry.get("tool_calls", 0)))
+    table.add_row("Target Model", f"[magenta]{args.model}[/magenta]")
+    
+    console.print(table)
+    
+    if args.verbose:
+        # Show sub-query/thought trace if present
+        sub_queries = result.get("sub_queries", [])
+        if sub_queries:
+            console.print(Panel("\n".join([f"• {q}" for q in sub_queries]), title="Self-Correction / Thought Trace", border_style="dim"))
+
+    console.print("\n[dim italic text_align_right]Optimized by Gemini-Claw v1.2[/dim italic text_align_right]")
 
 if __name__ == "__main__":
     main()
