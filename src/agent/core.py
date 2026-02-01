@@ -34,13 +34,7 @@ class GeminiAgent:
         ]
         
         if self.session_id:
-            # Note: cheatsheet says -r or --resume for session ID
-            # But let's check if it supports starting a new one with a name
-            # Or if we should just use the default session management.
-            # For now, let's stick to simple execution.
-            pass
-            
-        full_prompt = prompt
+            cmd.extend(["--resume", self.session_id])
         if system_prompt:
             full_prompt = f"SYSTEM INSTRUCTIONS:\n{system_prompt}\n\nUSER REQUEST:\n{prompt}"
 
@@ -75,6 +69,11 @@ class GeminiAgent:
                     if "meta" not in data:
                         data["meta"] = {}
                     data["meta"]["total_latency_ms"] = latency
+
+                    # Capture Session ID for future turns
+                    if not self.session_id and "sessionId" in data:
+                        self.session_id = data["sessionId"]
+                    
                     return data
                 
                 return {"response": output, "meta": {"total_latency_ms": latency}}
