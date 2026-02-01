@@ -14,12 +14,15 @@ class AgentLoop:
         Executes the query using a single-shot autonomous research strategy.
         Gemini is tasked to decompose, search, fetch, and synthesize internally.
         """
+        current_date = time.strftime("%Y-%m-%d")
         research_system_prompt = (
-            "You are an elite AI Research Analyst. Your goal is to provide a comprehensive, "
-            "deeply researched, and evidence-based report in Korean.\n\n"
+            f"You are an elite AI Research Analyst. Today's date is {current_date}.\n"
+            "Your goal is to provide a comprehensive, deeply researched, and evidence-based report in Korean.\n\n"
             "RESEARCH GUIDELINES:\n"
-            "1. **Decomposition**: Break down the user's query into specific technical and market-related aspects.\n"
-            "2. **Search**: Use `google_web_search` multiple times to find the latest and most relevant sources.\n"
+            "1. **Recent News Focus**: Look for the most recent updates (Jan/Feb 2026). "
+            "Specifically investigate investments, conflicts, and collaborations between OpenAI, Nvidia, and Amazon.\n"
+            "2. **Diverse Sources**: Use `google_web_search` multiple times. "
+            "Include community insights from Reddit and Hacker News for ground-level sentiments.\n"
             "3. **Deep Reading**: For high-value articles, use `web_fetch` to read the full content. "
             "Do not rely solely on search snippets.\n"
             "4. **Synthesis**: Focus on technical details, executive movements, and critical evaluations (e.g., 'AI bubble' debate).\n"
